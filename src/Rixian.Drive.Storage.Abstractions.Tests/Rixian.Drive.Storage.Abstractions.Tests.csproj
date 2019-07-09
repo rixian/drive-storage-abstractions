@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Library\Library.csproj" />
+    <ProjectReference Include="..\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
