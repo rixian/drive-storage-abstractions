@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <CodeAnalysisRuleSet>..\shipping.ruleset</CodeAnalysisRuleSet>
+    <Description>Storage abstractions for Rixian Drive.</Description>
   </PropertyGroup>
 
 </Project>

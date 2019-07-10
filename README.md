@@ -1,8 +1,9 @@
-# Your Library
+# Rixian Drive Storage Abstractions
 
-***An awesome template for your awesome library***
+***Storage abstractions for Rixian Drive.***
 
 [![NuGet package](https://img.shields.io/nuget/v/Rixian.Drive.Storage.Abstractions.svg)](https://nuget.org/packages/Rixian.Drive.Storage.Abstractions)
+[![Build Status](https://dev.azure.com/rixian/Cloud%20Platform/_apis/build/status/rixian.drive-storage-abstractions?branchName=master)](https://dev.azure.com/rixian/Cloud%20Platform/_build/latest?definitionId=86&branchName=master)
 [![codecov](https://codecov.io/gh/rixian/drive-storage-abstractions/branch/master/graph/badge.svg)](https://codecov.io/gh/rixian/drive-storage-abstractions)
 
 ## Features
