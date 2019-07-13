@@ -4,6 +4,7 @@
 namespace Rixian.Drive.Storage.Abstractions
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -29,10 +30,3 @@ namespace Rixian.Drive.Storage.Abstractions
         Task<IStorageDriver> GetDriverAsync(string driverInfo);
     }
 }
-
-
-/*
- * Blob store ()
- * Connection string to blob store (volume)
- * Partition within blob store (partition)
- */
