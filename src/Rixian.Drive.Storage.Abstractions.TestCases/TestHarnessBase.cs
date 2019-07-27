@@ -17,7 +17,6 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
         protected const string DefaultStorageDriverInfo = "UseDefaultDriver=true;";
 
         protected static readonly Guid DefaultDriveControllerId = Guid.Parse("c33f55ed-5e53-40e9-9282-d1c824bd1b54");
-        private readonly Dictionary<string, IServiceProvider> serviceProviders = new Dictionary<string, IServiceProvider>();
         private bool disposedValue = false; // To detect redundant calls
 
         public TestHarnessBase(ITestOutputHelper logger)
