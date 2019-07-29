@@ -12,13 +12,13 @@ using Xunit.Abstractions;
 
 public class SampleStorageDriver : IStorageDriver
 {
-    public Task DeleteAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, CancellationToken cancellationToken = default)
+    public Task DeleteAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken = default)
     {
         File.Delete(this.GetLocalPath(tenantId, partitionId, fileId, streamName));
         return Task.CompletedTask;
     }
 
-    public Task<DriveFile> DownloadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, CancellationToken cancellationToken = default)
+    public Task<DriveFile> DownloadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken = default)
     {
         var path = this.GetLocalPath(tenantId, partitionId, fileId, streamName);
         var metadataPath = $"{path}-metadata";
@@ -38,7 +38,7 @@ public class SampleStorageDriver : IStorageDriver
         });
     }
 
-    public Task UploadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, Stream stream, DriveFileMetadata fileMetadata = null, CancellationToken cancellationToken = default)
+    public Task UploadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, Stream stream, DriveFileMetadata fileMetadata = null, CancellationToken cancellationToken = default)
     {
         if (stream == null)
         {

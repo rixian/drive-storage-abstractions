@@ -20,11 +20,12 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="partitionId">The ID of the partition to which the file is being written.</param>
         /// <param name="fileId">The ID of the file to write.</param>
         /// <param name="streamName">The name of the stream being written.</param>
+        /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="stream">The data stream to upload.</param>
         /// <param name="fileMetadata">Optional. Metadata about the file being uploaded.</param>
         /// <param name="cancellationToken">Used to cancel the upload operation.</param>
         /// <returns>Awaitable task.</returns>
-        Task UploadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, Stream stream, DriveFileMetadata fileMetadata = default(DriveFileMetadata), CancellationToken cancellationToken = default(CancellationToken));
+        Task UploadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, Stream stream, DriveFileMetadata fileMetadata = default(DriveFileMetadata), CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Downloads a file stream from the underlying storage subsystem.
@@ -33,9 +34,10 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="partitionId">The ID of the partition that contains the file.</param>
         /// <param name="fileId">The ID of the file to download.</param>
         /// <param name="streamName">The name of the stream being downloaded.</param>
+        /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the download operation.</param>
         /// <returns>The downloaded file data.</returns>
-        Task<DriveFile> DownloadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, CancellationToken cancellationToken = default(CancellationToken));
+        Task<DriveFile> DownloadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes a file stream in the underlying storage subsystem.
@@ -44,8 +46,9 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="partitionId">The ID of the partition that contains the file.</param>
         /// <param name="fileId">The ID of the file to delete.</param>
         /// <param name="streamName">The name of the stream being deleted.</param>
+        /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        Task DeleteAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, CancellationToken cancellationToken = default(CancellationToken));
+        Task DeleteAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

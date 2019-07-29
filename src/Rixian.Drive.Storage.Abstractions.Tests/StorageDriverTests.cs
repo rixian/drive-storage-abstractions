@@ -28,6 +28,7 @@ public class StorageDriverTests
         var partitionId = Guid.NewGuid();
         var fileId = Guid.NewGuid();
         var streamName = "default";
+        string alternateId = null;
         var fileName = "test.txt";
         var contentType = "text/plain";
         var text = "This is a test!";
@@ -36,14 +37,14 @@ public class StorageDriverTests
         var data = Encoding.UTF8.GetBytes(text);
         using (var ms = new MemoryStream(data))
         {
-            await sampleDriver.UploadAsync(tenantId, partitionId, fileId, streamName, ms, new DriveFileMetadata
+            await sampleDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, ms, new DriveFileMetadata
             {
                 ContentType = contentType,
                 FileName = fileName,
             }).ConfigureAwait(false);
         }
 
-        DriveFile file = await sampleDriver.DownloadAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+        DriveFile file = await sampleDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
 
         file.Should().NotBeNull();
         file.Data.Should().NotBeNull();
@@ -61,7 +62,7 @@ public class StorageDriverTests
             readText.Should().Be(text);
         }
 
-        await sampleDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+        await sampleDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         Directory.Delete(tenantId.ToString(), true);
     }
 }
