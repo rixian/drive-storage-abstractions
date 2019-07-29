@@ -29,6 +29,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
             string streamName = null;
+            string alternateId = null;
             var metadata = new DriveFileMetadata
             {
                 FileName = "test.txt",
@@ -38,10 +39,10 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContents));
 
             // Act
-            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false);
+            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
 
             // Assert
-            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
             result.Data.Should().NotBeNull();
@@ -59,7 +60,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -71,6 +72,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
             string streamName = null;
+            string alternateId = null;
             var metadata = new DriveFileMetadata
             {
                 FileName = null,
@@ -79,10 +81,10 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var stream = new MemoryStream();
 
             // Act
-            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false);
+            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
 
             // Assert
-            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
             result.Metadata.Should().NotBeNull();
@@ -91,7 +93,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -103,6 +105,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
             string streamName = null;
+            string alternateId = null;
             var metadata = new DriveFileMetadata
             {
                 FileName = "test.txt",
@@ -111,10 +114,10 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var stream = new MemoryStream();
 
             // Act
-            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false);
+            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
 
             // Assert
-            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
             result.Metadata.Should().NotBeNull();
@@ -123,7 +126,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -137,12 +140,13 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             string streamName = null;
             DriveFileMetadata metadata = null;
             var stream = new MemoryStream();
+            string alternateId = null;
 
             // Act
-            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false);
+            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
 
             // Assert
-            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
             result.Metadata.Should().NotBeNull();
@@ -151,7 +155,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Theory]
@@ -171,13 +175,14 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
                 ContentType = "text/plain",
             };
             var fileContents = "Hello world!";
+            string alternateId = null;
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContents));
 
             // Act
-            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false);
+            await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
 
             // Assert
-            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
             result.Data.Should().NotBeNull();
@@ -195,7 +200,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -207,17 +212,18 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
             string streamName = null;
+            string alternateId = null;
             DriveFileMetadata metadata = null;
             Stream stream = null;
 
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            await Assert.ThrowsAsync<ArgumentNullException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -229,17 +235,18 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
             string streamName = null;
+            string alternateId = null;
             DriveFileMetadata metadata = null;
             Stream stream = new MemoryStream();
 
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -251,17 +258,18 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             Guid partitionId = Guid.Empty;
             var fileId = Guid.NewGuid();
             string streamName = null;
+            string alternateId = null;
             DriveFileMetadata metadata = null;
             Stream stream = new MemoryStream();
 
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -273,17 +281,18 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var partitionId = Guid.NewGuid();
             Guid fileId = Guid.Empty;
             string streamName = null;
+            string alternateId = null;
             DriveFileMetadata metadata = null;
             Stream stream = new MemoryStream();
 
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName).ConfigureAwait(false);
+            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         protected abstract Task<IStorageDriver> GetStorageDriverAsync(string testName);
