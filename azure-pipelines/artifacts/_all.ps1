@@ -20,7 +20,7 @@ Function EnsureTrailingSlash($path) {
     $path.Replace('\', [IO.Path]::DirectorySeparatorChar)
 }
 
-Get-ChildItem "$PSScriptRoot\*.ps1" -Exclude "_*" -Recurse |% {
+Get-ChildItem "$PSScriptRoot\*.ps1" -Exclude "_*" -Recurse | ForEach-Object {
     $ArtifactName = $_.BaseName
 
     (& $_).GetEnumerator() |% {
