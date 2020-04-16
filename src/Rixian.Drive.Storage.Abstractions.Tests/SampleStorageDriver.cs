@@ -32,7 +32,7 @@ public class SampleStorageDriver : IStorageDriver
         return Task.CompletedTask;
     }
 
-    public Task<DriveFile> DownloadAsync(DownloadOperationParameters parameters, CancellationToken cancellationToken = default)
+    public Task<DriveFile> DownloadAsync(DownloadOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {
@@ -85,7 +85,7 @@ public class SampleStorageDriver : IStorageDriver
         return Task.CompletedTask;
     }
 
-    public Task UploadAsync(UploadOperationParameters parameters, CancellationToken cancellationToken = default)
+    public Task UploadAsync(UploadOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {

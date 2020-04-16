@@ -4,25 +4,4 @@
 
 [![NuGet package](https://img.shields.io/nuget/v/Rixian.Drive.Storage.Abstractions.svg)](https://nuget.org/packages/Rixian.Drive.Storage.Abstractions)
 [![Build Status](https://dev.azure.com/rixian/Cloud%20Platform/_apis/build/status/rixian.drive-storage-abstractions?branchName=master)](https://dev.azure.com/rixian/Cloud%20Platform/_build/latest?definitionId=86&branchName=master)
-[![codecov](https://codecov.io/gh/rixian/drive-storage-abstractions/branch/master/graph/badge.svg)](https://codecov.io/gh/rixian/drive-storage-abstractions)
-
-## Features
-
-* Follow the best and simplest patterns of build, pack and test with dotnet CLI.
-* Static analyzers: [FxCop](https://docs.microsoft.com/en-us/visualstudio/code-quality/fxcop-analyzers?view=vs-2019) and [StyleCop](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
-* Read-only source tree (builds to top-level bin/obj folders)
-* Auto-versioning (via [Nerdbank.GitVersioning](https://github.com/aarnott/nerdbank.gitversioning))
-* Azure Pipeline via YAML with all dependencies declared for long-term serviceability.
-* Testing on .NET Framework, multiple .NET Core versions
-* Testing on Windows, Linux and OSX
-* Code coverage published to Azure Pipelines
-* Code coverage published to codecov.io so GitHub PRs get code coverage results added as a PR comment
-
-## Consumption
-
-Once you've expanded this template for your own use, you should **run the `Expand-Template.ps1` script** to customize the template for your own project.
-
-Further customize your repo by:
-
-1. Verify the license is suitable for your goal as it appears in the LICENSE and stylecop.json files and the Directory.Build.props file's `PackageLicenseExpression` property.
-1. Reset or replace the badges at the top of this file.
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9bea70f02b59432ab421f8b43ca676c0)](https://www.codacy.com/gh/rixian/drive-storage-abstractions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rixian/drive-storage-abstractions&amp;utm_campaign=Badge_Grade)

@@ -17,6 +17,6 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="parameters">The operation parameters.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        Task SnapshotAsync(SnapshotOperationParameters parameters, CancellationToken cancellationToken = default);
+        Task SnapshotAsync(SnapshotOperationParameters parameters, CancellationToken cancellationToken);
     }
 }
