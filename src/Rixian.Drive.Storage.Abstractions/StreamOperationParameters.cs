@@ -13,10 +13,11 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <summary>
         /// The default stream name: 'default'.
         /// </summary>
-        public const string DefaultStreamName = "default";
+        public static readonly string DefaultStreamName = "default";
 
         private string streamName = DefaultStreamName;
 
+        /// <inheritdoc/>
         public string StreamName
         {
             get => this.streamName;

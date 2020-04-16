@@ -16,7 +16,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
     public abstract class StorageDriverTestHarness : TestHarnessBase
     {
-        public StorageDriverTestHarness(ITestOutputHelper logger)
+        protected StorageDriverTestHarness(ITestOutputHelper logger)
             : base(logger)
         {
         }

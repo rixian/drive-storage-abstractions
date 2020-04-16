@@ -136,5 +136,103 @@ namespace Rixian.Drive.Storage.Abstractions
                 },
                 cancellationToken).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Upgrades the partition to this storage driver version.
+        /// </summary>
+        /// <param name="storageDriver">The IStorageDriver.</param>
+        /// <param name="tenantId">The tenant ID.</param>
+        /// <param name="volumeId">The volume ID. Used for migrating off v1.0 storage.</param>
+        /// <param name="partitionId">The partition ID.</param>
+        /// <returns>Awaitable task.</returns>
+        public static async Task UpgradePartitionAsync(this IStorageDriver storageDriver, Guid tenantId, Guid volumeId, Guid partitionId)
+        {
+            if (storageDriver is null)
+            {
+                throw new ArgumentNullException(nameof(storageDriver));
+            }
+
+            await storageDriver.UpgradePartitionAsync(tenantId, volumeId, partitionId, default).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Uploads a file stream to the underlying storage subsystem.
+        /// </summary>
+        /// <param name="storageDriver">The IStorageDriver.</param>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <returns>Awaitable task.</returns>
+        public static async Task UploadAsync(this IStorageDriver storageDriver, UploadOperationParameters parameters)
+        {
+            if (storageDriver is null)
+            {
+                throw new ArgumentNullException(nameof(storageDriver));
+            }
+
+            await storageDriver.UploadAsync(parameters, default).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Downloads a file stream from the underlying storage subsystem.
+        /// </summary>
+        /// <param name="storageDriver">The IStorageDriver.</param>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <returns>The downloaded file data.</returns>
+        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, DownloadOperationParameters parameters)
+        {
+            if (storageDriver is null)
+            {
+                throw new ArgumentNullException(nameof(storageDriver));
+            }
+
+            return await storageDriver.DownloadAsync(parameters, default).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Deletes a file stream in the underlying storage subsystem.
+        /// </summary>
+        /// <param name="storageDriver">The IStorageDriver.</param>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <returns>Awaitable task.</returns>
+        public static async Task DeleteAsync(this IStorageDriver storageDriver, DeleteOperationParameters parameters)
+        {
+            if (storageDriver is null)
+            {
+                throw new ArgumentNullException(nameof(storageDriver));
+            }
+
+            await storageDriver.DeleteAsync(parameters, default).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Lists all file streams for a file in the underlying storage subsystem.
+        /// </summary>
+        /// <param name="storageDriver">The IStorageDriver.</param>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <returns>Awaitable task.</returns>
+        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, ListStreamsOperationParameters parameters)
+        {
+            if (storageDriver is null)
+            {
+                throw new ArgumentNullException(nameof(storageDriver));
+            }
+
+            return await storageDriver.ListStreamsAsync(parameters, default).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Checks for existance for a file stream in the underlying storage subsystem.
+        /// </summary>
+        /// <param name="storageDriver">The IStorageDriver.</param>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <returns>The downloaded file data.</returns>
+        public static async Task<bool> ExistsAsync(this IStorageDriver storageDriver, ExistsOperationParameters parameters)
+        {
+            if (storageDriver is null)
+            {
+                throw new ArgumentNullException(nameof(storageDriver));
+            }
+
+            return await storageDriver.ExistsAsync(parameters, default).ConfigureAwait(false);
+        }
     }
 }
