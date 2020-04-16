@@ -4,6 +4,7 @@
 namespace Rixian.Drive.Storage.Abstractions.TestCases
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Text;
@@ -204,6 +205,196 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
         }
 
         [Fact]
+        public async Task TestHarness_ListStreamsAsync_MultipleStreams_Success()
+        {
+            // Arrange
+            IStorageDriver storageDriver = await this.GetDefaultStorageDriverAsync().ConfigureAwait(false);
+            var tenantId = Guid.NewGuid();
+            var partitionId = Guid.NewGuid();
+            var fileId = Guid.NewGuid();
+            var metadata = new DriveFileMetadata
+            {
+                FileName = "test.txt",
+                ContentType = "text/plain",
+            };
+            var fileContents = "Hello world!";
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContents));
+
+            // Act
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                StreamName = "stream1",
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                StreamName = "stream2",
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+
+            // Assert
+            ICollection<string> streams = await storageDriver.ListStreamsAsync(new ListStreamsOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+            }).ConfigureAwait(false);
+
+            streams.Should().NotBeNullOrEmpty();
+            streams.Should().Contain(new[] { StreamOperationParameters.DefaultStreamName, "stream1", "stream2" });
+
+            // Cleanup
+            await storageDriver.DeleteAsync(new DeleteOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+            }).ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task TestHarness_ListStreamsAsync_SingleStream_Success()
+        {
+            // Arrange
+            IStorageDriver storageDriver = await this.GetDefaultStorageDriverAsync().ConfigureAwait(false);
+            var tenantId = Guid.NewGuid();
+            var partitionId = Guid.NewGuid();
+            var fileId = Guid.NewGuid();
+            var metadata = new DriveFileMetadata
+            {
+                FileName = "test.txt",
+                ContentType = "text/plain",
+            };
+            var fileContents = "Hello world!";
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContents));
+
+            // Act
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+
+            // Assert
+            ICollection<string> streams = await storageDriver.ListStreamsAsync(new ListStreamsOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+            }).ConfigureAwait(false);
+
+            streams.Should().NotBeNullOrEmpty();
+            streams.Should().Contain(new[] { StreamOperationParameters.DefaultStreamName });
+
+            // Cleanup
+            await storageDriver.DeleteAsync(new DeleteOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+            }).ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task TestHarness_DeleteAsync_MultipleStreams_Success()
+        {
+            // Arrange
+            IStorageDriver storageDriver = await this.GetDefaultStorageDriverAsync().ConfigureAwait(false);
+            var tenantId = Guid.NewGuid();
+            var partitionId = Guid.NewGuid();
+            var fileId = Guid.NewGuid();
+            var metadata = new DriveFileMetadata
+            {
+                FileName = "test.txt",
+                ContentType = "text/plain",
+            };
+            var fileContents = "Hello world!";
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContents));
+
+            // Act
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                StreamName = "stream1",
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+            await storageDriver.UploadAsync(new UploadOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                StreamName = "stream2",
+                Data = stream,
+                FileMetadata = metadata,
+            }).ConfigureAwait(false);
+
+            await storageDriver.DeleteAsync(new DeleteOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+            }).ConfigureAwait(false);
+
+            // Assert
+            var defaultStreamExists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+            }).ConfigureAwait(false);
+            var stream1Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                StreamName = "stream1",
+            }).ConfigureAwait(false);
+            var stream2Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            {
+                TenantId = tenantId,
+                PartitionId = partitionId,
+                FileId = fileId,
+                StreamName = "stream2",
+            }).ConfigureAwait(false);
+
+            defaultStreamExists.Should().BeFalse();
+            stream1Exists.Should().BeFalse();
+            stream2Exists.Should().BeFalse();
+
+            // Cleanup
+        }
+
+        [Fact]
         public async Task TestHarness_UploadAsync_NullStream_Throws()
         {
             // Arrange
@@ -246,7 +437,6 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -269,7 +459,6 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         [Fact]
@@ -292,7 +481,6 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Cleanup
             stream?.Dispose();
-            await storageDriver.DeleteAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
         }
 
         protected abstract Task<IStorageDriver> GetStorageDriverAsync(string testName);
