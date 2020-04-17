@@ -13,11 +13,11 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <summary>
         /// Gets or sets the file data.
         /// </summary>
-        public Stream Data { get; set; }
+        public Stream? Data { get; set; }
 
         /// <summary>
         /// Gets or sets the file metadata.
         /// </summary>
-        public DriveFileMetadata Metadata { get; set; }
+        public DriveFileMetadata? Metadata { get; set; }
     }
 }

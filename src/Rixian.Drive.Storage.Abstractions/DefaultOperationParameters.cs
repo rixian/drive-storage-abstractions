@@ -10,7 +10,7 @@ namespace Rixian.Drive.Storage.Abstractions
     /// </summary>
     public class DefaultOperationParameters : IDefaultOperationParameters
     {
-        private string version;
+        private string? version;
 
         /// <inheritdoc/>
         public Guid TenantId { get; set; }
@@ -22,10 +22,10 @@ namespace Rixian.Drive.Storage.Abstractions
         public Guid FileId { get; set; }
 
         /// <inheritdoc/>
-        public string AlternateId { get; set; }
+        public string? AlternateId { get; set; }
 
         /// <inheritdoc/>
-        public string Version
+        public string? Version
         {
             get => this.version;
             set
