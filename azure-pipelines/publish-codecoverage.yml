@@ -28,4 +28,4 @@ steps:
   inputs:
     codeCoverageTool: cobertura
     summaryFileLocation: 'coveragereport/Cobertura.xml'
-    failIfCoverageEmpty: true
+    failIfCoverageEmpty: false
