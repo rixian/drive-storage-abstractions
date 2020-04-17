@@ -15,7 +15,7 @@ if (!(Test-Path $binaryToolsPath)) { $null = mkdir $binaryToolsPath }
 $nugetPath = Join-Path $binaryToolsPath nuget.exe
 
 if (!(Test-Path $nugetPath)) {
-    Write-Host "Downloading nuget.exe $NuGetVersion..." -ForegroundColor Yellow
+    Write-Output "Downloading nuget.exe $NuGetVersion..." -ForegroundColor Yellow
     (New-Object System.Net.WebClient).DownloadFile("https://dist.nuget.org/win-x86-commandline/v$NuGetVersion/NuGet.exe", $nugetPath)
 }
 

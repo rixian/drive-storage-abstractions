@@ -6,5 +6,5 @@ param (
 )
 
 & "$PSScriptRoot/_stage_all.ps1" -ArtifactNameSuffix $ArtifactNameSuffix |% {
-    Write-Host "##vso[artifact.upload containerfolder=$($_.Name);artifactname=$($_.Name);]$($_.Path)"
+    Write-Output "##vso[artifact.upload containerfolder=$($_.Name);artifactname=$($_.Name);]$($_.Path)"
 }

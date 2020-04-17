@@ -16,7 +16,7 @@ $toolPath = "$toolInstallDir/nbgv"
 if (!(Test-Path $toolInstallDir)) { New-Item -Path $toolInstallDir -ItemType Directory | Out-Null }
 
 if (!(Get-Command $toolPath -ErrorAction SilentlyContinue)) {
-    Write-Host "Installing nbgv to $toolInstallDir"
+    Write-Output "Installing nbgv to $toolInstallDir"
     dotnet tool install --tool-path "$toolInstallDir" nbgv --configfile "$PSScriptRoot/justnugetorg.nuget.config" | Out-Null
 }
 
