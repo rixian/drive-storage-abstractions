@@ -23,7 +23,7 @@ public class SampleStorageDriver : IStorageDriver
             throw new ArgumentNullException(nameof(parameters));
         }
 
-        var path = this.GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
+        var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
         if (File.Exists(path))
         {
             File.Delete(path);
@@ -39,7 +39,7 @@ public class SampleStorageDriver : IStorageDriver
             throw new ArgumentNullException(nameof(parameters));
         }
 
-        var path = this.GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
+        var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
         var metadataPath = $"{path}-metadata";
         var fileInfo = new FileInfo(path);
 
@@ -64,7 +64,7 @@ public class SampleStorageDriver : IStorageDriver
             throw new ArgumentNullException(nameof(parameters));
         }
 
-        var path = this.GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
+        var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
         return Task.FromResult(File.Exists(path));
     }
 
@@ -75,7 +75,7 @@ public class SampleStorageDriver : IStorageDriver
             throw new ArgumentNullException(nameof(parameters));
         }
 
-        var path = this.GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, null);
+        var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, null);
         var files = Directory.GetFiles(path, "*.*");
         return Task.FromResult<ICollection<string>>(files);
     }
@@ -97,8 +97,7 @@ public class SampleStorageDriver : IStorageDriver
             throw new ArgumentNullException(nameof(parameters));
         }
 
-        var path = this.GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
-        var metadataPath = $"{path}-metadata";
+        var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
 
         using (var fs = new FileStream(path, FileMode.OpenOrCreate))
         {
@@ -114,7 +113,7 @@ public class SampleStorageDriver : IStorageDriver
         return Task.CompletedTask;
     }
 
-    private string GetLocalPath(Guid tenantId, Guid partitionId, Guid fileId, string? streamName)
+    private static string GetLocalPath(Guid tenantId, Guid partitionId, Guid fileId, string? streamName)
     {
         Directory.CreateDirectory($"{tenantId}/{partitionId}/{fileId}");
         if (string.IsNullOrWhiteSpace(streamName))
