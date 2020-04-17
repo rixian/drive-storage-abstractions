@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29322.22
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1CE9670B-D5FF-46A7-9D00-24E70E6ED48B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		global.json = global.json
+		nuget.config = nuget.config
+		stylecop.json = stylecop.json
+		version.json = version.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9E154A29-1796-4B85-BD81-B6A385D8FF71}"
+	ProjectSection(SolutionItems) = preProject
+		src\.editorconfig = src\.editorconfig
+		src\Directory.Build.props = src\Directory.Build.props
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{36CCE840-6FE5-4DB9-A8D5-8CF3CB6D342A}"
+	ProjectSection(SolutionItems) = preProject
+		test\.editorconfig = test\.editorconfig
+		test\Directory.Build.props = test\Directory.Build.props
+		test\Directory.Build.targets = test\Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions", "src\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj", "{B0FEF5D5-41DD-4082-844D-8424BC40B6BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.Tests", "test\Rixian.Drive.Storage.Abstractions.Tests\Rixian.Drive.Storage.Abstractions.Tests.csproj", "{6D5E3BAE-1D42-4946-857B-7C77921965A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.TestCases", "test\Rixian.Drive.Storage.Abstractions.TestCases\Rixian.Drive.Storage.Abstractions.TestCases.csproj", "{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0FEF5D5-41DD-4082-844D-8424BC40B6BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FEF5D5-41DD-4082-844D-8424BC40B6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FEF5D5-41DD-4082-844D-8424BC40B6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FEF5D5-41DD-4082-844D-8424BC40B6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5E3BAE-1D42-4946-857B-7C77921965A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5E3BAE-1D42-4946-857B-7C77921965A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5E3BAE-1D42-4946-857B-7C77921965A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5E3BAE-1D42-4946-857B-7C77921965A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E154A29-1796-4B85-BD81-B6A385D8FF71} = {1CE9670B-D5FF-46A7-9D00-24E70E6ED48B}
+		{36CCE840-6FE5-4DB9-A8D5-8CF3CB6D342A} = {1CE9670B-D5FF-46A7-9D00-24E70E6ED48B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3944F6A-384B-4B0F-B93F-3BD513DC57BD}
+	EndGlobalSection
+EndGlobal

@@ -11,11 +11,11 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <summary>
         /// Gets or sets the name of the file.
         /// </summary>
-        public string FileName { get; set; }
+        public string? FileName { get; set; }
 
         /// <summary>
         /// Gets or sets the content type of the file.
         /// </summary>
-        public string ContentType { get; set; }
+        public string? ContentType { get; set; }
     }
 }

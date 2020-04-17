@@ -4,7 +4,7 @@
 namespace Rixian.Drive.Storage.Abstractions
 {
     using System;
-    using System.IO;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -14,41 +14,58 @@ namespace Rixian.Drive.Storage.Abstractions
     public interface IStorageDriver
     {
         /// <summary>
-        /// Uploads a file stream to the underlying storage subsystem.
+        /// Gets the current storage driver verision.
         /// </summary>
-        /// <param name="tenantId">The ID of the tenant.</param>
-        /// <param name="partitionId">The ID of the partition to which the file is being written.</param>
-        /// <param name="fileId">The ID of the file to write.</param>
-        /// <param name="streamName">The name of the stream being written.</param>
-        /// <param name="alternateId">The alternate id for the file.</param>
-        /// <param name="stream">The data stream to upload.</param>
-        /// <param name="fileMetadata">Optional. Metadata about the file being uploaded.</param>
+        string DriverVersion { get; }
+
+        /// <summary>
+        /// Upgrades the partition to this storage driver version.
+        /// </summary>
+        /// <param name="tenantId">The tenant ID.</param>
+        /// <param name="volumeId">The volume ID. Used for migrating off v1.0 storage.</param>
+        /// <param name="partitionId">The partition ID.</param>
         /// <param name="cancellationToken">Used to cancel the upload operation.</param>
         /// <returns>Awaitable task.</returns>
-        Task UploadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, Stream stream, DriveFileMetadata fileMetadata = default(DriveFileMetadata), CancellationToken cancellationToken = default(CancellationToken));
+        Task UpgradePartitionAsync(Guid tenantId, Guid volumeId, Guid partitionId, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Uploads a file stream to the underlying storage subsystem.
+        /// </summary>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <param name="cancellationToken">Used to cancel the upload operation.</param>
+        /// <returns>Awaitable task.</returns>
+        Task UploadAsync(UploadOperationParameters parameters, CancellationToken cancellationToken);
 
         /// <summary>
         /// Downloads a file stream from the underlying storage subsystem.
         /// </summary>
-        /// <param name="tenantId">The ID of the tenant.</param>
-        /// <param name="partitionId">The ID of the partition that contains the file.</param>
-        /// <param name="fileId">The ID of the file to download.</param>
-        /// <param name="streamName">The name of the stream being downloaded.</param>
-        /// <param name="alternateId">The alternate id for the file.</param>
+        /// <param name="parameters">The operation parameters.</param>
         /// <param name="cancellationToken">Used to cancel the download operation.</param>
         /// <returns>The downloaded file data.</returns>
-        Task<DriveFile> DownloadAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken = default(CancellationToken));
+        Task<DriveFile> DownloadAsync(DownloadOperationParameters parameters, CancellationToken cancellationToken);
 
         /// <summary>
         /// Deletes a file stream in the underlying storage subsystem.
         /// </summary>
-        /// <param name="tenantId">The ID of the tenant.</param>
-        /// <param name="partitionId">The ID of the partition that contains the file.</param>
-        /// <param name="fileId">The ID of the file to delete.</param>
-        /// <param name="streamName">The name of the stream being deleted.</param>
-        /// <param name="alternateId">The alternate id for the file.</param>
+        /// <param name="parameters">The operation parameters.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        Task DeleteAsync(Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken = default(CancellationToken));
+        Task DeleteAsync(DeleteOperationParameters parameters, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Lists all file streams for a file in the underlying storage subsystem.
+        /// </summary>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <param name="cancellationToken">Used to cancel the delete operation.</param>
+        /// <returns>Awaitable task.</returns>
+        Task<ICollection<string>> ListStreamsAsync(ListStreamsOperationParameters parameters, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Checks for existance for a file stream in the underlying storage subsystem.
+        /// </summary>
+        /// <param name="parameters">The operation parameters.</param>
+        /// <param name="cancellationToken">Used to cancel the download operation.</param>
+        /// <returns>The downloaded file data.</returns>
+        Task<bool> ExistsAsync(ExistsOperationParameters parameters, CancellationToken cancellationToken);
     }
 }
