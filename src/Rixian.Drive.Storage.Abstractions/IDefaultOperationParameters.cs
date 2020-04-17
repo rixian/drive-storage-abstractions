@@ -28,12 +28,12 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <summary>
         /// Gets or sets the alternate id for the file.
         /// </summary>
-        string AlternateId { get; set; }
+        string? AlternateId { get; set; }
 
         /// <summary>
         /// Gets or sets the file version.
         /// </summary>
-        string Version { get; set; }
+        string? Version { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the parameters indicates a file version.

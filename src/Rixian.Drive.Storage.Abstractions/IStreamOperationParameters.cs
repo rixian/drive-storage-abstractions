@@ -16,6 +16,6 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <summary>
         /// Gets or sets the name of the stream. Defaults to the DefaultStreamName.
         /// </summary>
-        string StreamName { get; set; }
+        string? StreamName { get; set; }
     }
 }

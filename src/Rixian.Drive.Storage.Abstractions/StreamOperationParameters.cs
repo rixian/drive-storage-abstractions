@@ -15,10 +15,10 @@ namespace Rixian.Drive.Storage.Abstractions
         /// </summary>
         public static readonly string DefaultStreamName = "default";
 
-        private string streamName = DefaultStreamName;
+        private string? streamName = DefaultStreamName;
 
         /// <inheritdoc/>
-        public string StreamName
+        public string? StreamName
         {
             get => this.streamName;
             set
@@ -29,7 +29,7 @@ namespace Rixian.Drive.Storage.Abstractions
                 }
                 else
                 {
-                    this.streamName = value.Trim();
+                    this.streamName = value?.Trim();
                 }
             }
         }

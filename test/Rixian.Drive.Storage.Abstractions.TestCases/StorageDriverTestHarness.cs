@@ -29,8 +29,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            string alternateId = null;
+            string? streamName = null;
+            string? alternateId = null;
             var metadata = new DriveFileMetadata
             {
                 FileName = "test.txt",
@@ -47,17 +47,17 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             result.Should().NotBeNull();
 
             result.Data.Should().NotBeNull();
-            result.Data.Length.Should().Be(stream.Length);
-            result.Data.Position.Should().Be(0);
-            using (var sr = new StreamReader(result.Data))
+            result.Data?.Length.Should().Be(stream.Length);
+            result.Data?.Position.Should().Be(0);
+            using (var sr = new StreamReader(result.Data!))
             {
                 var contents = sr.ReadToEnd();
                 contents.Should().Be(fileContents);
             }
 
-            result.Metadata.Should().NotBeNull();
-            result.Metadata.FileName.Should().Be(metadata.FileName);
-            result.Metadata.ContentType.Should().Be(metadata.ContentType);
+            result.Metadata?.Should().NotBeNull();
+            result.Metadata?.FileName.Should().Be(metadata.FileName);
+            result.Metadata?.ContentType.Should().Be(metadata.ContentType);
 
             // Cleanup
             stream?.Dispose();
@@ -72,8 +72,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            string alternateId = null;
+            string? streamName = null;
+            string? alternateId = null;
             var metadata = new DriveFileMetadata
             {
                 FileName = null,
@@ -88,9 +88,9 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
-            result.Metadata.Should().NotBeNull();
-            result.Metadata.FileName.Should().BeNull();
-            result.Metadata.ContentType.Should().Be(metadata.ContentType);
+            result.Metadata?.Should().NotBeNull();
+            result.Metadata?.FileName.Should().BeNull();
+            result.Metadata?.ContentType.Should().Be(metadata.ContentType);
 
             // Cleanup
             stream?.Dispose();
@@ -105,8 +105,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            string alternateId = null;
+            string? streamName = null;
+            string? alternateId = null;
             var metadata = new DriveFileMetadata
             {
                 FileName = "test.txt",
@@ -121,9 +121,9 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
-            result.Metadata.Should().NotBeNull();
-            result.Metadata.FileName.Should().Be(metadata.FileName);
-            result.Metadata.ContentType.Should().Be("application/octet-stream");
+            result.Metadata?.Should().NotBeNull();
+            result.Metadata?.FileName.Should().Be(metadata.FileName);
+            result.Metadata?.ContentType.Should().Be("application/octet-stream");
 
             // Cleanup
             stream?.Dispose();
@@ -138,10 +138,10 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            DriveFileMetadata metadata = null;
+            string? streamName = null;
+            DriveFileMetadata? metadata = null;
             var stream = new MemoryStream();
-            string alternateId = null;
+            string? alternateId = null;
 
             // Act
             await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
@@ -150,9 +150,9 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             DriveFile result = await storageDriver.DownloadAsync(tenantId, partitionId, fileId, streamName, alternateId).ConfigureAwait(false);
             result.Should().NotBeNull();
 
-            result.Metadata.Should().NotBeNull();
-            result.Metadata.FileName.Should().BeNull();
-            result.Metadata.ContentType.Should().Be("application/octet-stream");
+            result.Metadata?.Should().NotBeNull();
+            result.Metadata?.FileName.Should().BeNull();
+            result.Metadata?.ContentType.Should().Be("application/octet-stream");
 
             // Cleanup
             stream?.Dispose();
@@ -176,7 +176,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
                 ContentType = "text/plain",
             };
             var fileContents = "Hello world!";
-            string alternateId = null;
+            string? alternateId = null;
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(fileContents));
 
             // Act
@@ -187,17 +187,17 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             result.Should().NotBeNull();
 
             result.Data.Should().NotBeNull();
-            result.Data.Length.Should().Be(stream.Length);
-            result.Data.Position.Should().Be(0);
-            using (var sr = new StreamReader(result.Data))
+            result.Data?.Length.Should().Be(stream.Length);
+            result.Data?.Position.Should().Be(0);
+            using (var sr = new StreamReader(result.Data!))
             {
                 var contents = sr.ReadToEnd();
                 contents.Should().Be(fileContents);
             }
 
-            result.Metadata.Should().NotBeNull();
-            result.Metadata.FileName.Should().Be(metadata.FileName);
-            result.Metadata.ContentType.Should().Be(metadata.ContentType);
+            result.Metadata?.Should().NotBeNull();
+            result.Metadata?.FileName.Should().Be(metadata.FileName);
+            result.Metadata?.ContentType.Should().Be(metadata.ContentType);
 
             // Cleanup
             stream?.Dispose();
@@ -402,10 +402,10 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            string alternateId = null;
-            DriveFileMetadata metadata = null;
-            Stream stream = null;
+            string? streamName = null;
+            string? alternateId = null;
+            DriveFileMetadata? metadata = null;
+            Stream? stream = null;
 
             // Act
 
@@ -425,9 +425,9 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             Guid tenantId = Guid.Empty;
             var partitionId = Guid.NewGuid();
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            string alternateId = null;
-            DriveFileMetadata metadata = null;
+            string? streamName = null;
+            string? alternateId = null;
+            DriveFileMetadata? metadata = null;
             Stream stream = new MemoryStream();
 
             // Act
@@ -447,9 +447,9 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             Guid partitionId = Guid.Empty;
             var fileId = Guid.NewGuid();
-            string streamName = null;
-            string alternateId = null;
-            DriveFileMetadata metadata = null;
+            string? streamName = null;
+            string? alternateId = null;
+            DriveFileMetadata? metadata = null;
             Stream stream = new MemoryStream();
 
             // Act
@@ -469,9 +469,9 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             Guid fileId = Guid.Empty;
-            string streamName = null;
-            string alternateId = null;
-            DriveFileMetadata metadata = null;
+            string? streamName = null;
+            string? alternateId = null;
+            DriveFileMetadata? metadata = null;
             Stream stream = new MemoryStream();
 
             // Act

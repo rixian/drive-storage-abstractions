@@ -30,8 +30,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             var tenantId = Guid.NewGuid();
             var partitionId = Guid.NewGuid();
             Guid fileId = Guid.NewGuid();
-            string alternateId = null;
-            DriveFileMetadata metadata = null;
+            string? alternateId = null;
+            DriveFileMetadata? metadata = null;
             using var defaultData = new MemoryStream();
             using var stream1Data = new MemoryStream();
 

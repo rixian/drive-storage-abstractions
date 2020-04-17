@@ -26,7 +26,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="stream">The data stream to upload.</param>
         /// <param name="fileMetadata">Optional. Metadata about the file being uploaded.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, Stream stream, DriveFileMetadata fileMetadata)
+        public static async Task UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, Stream? stream, DriveFileMetadata? fileMetadata)
         {
             if (storageDriver is null)
             {
@@ -60,7 +60,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="fileMetadata">Optional. Metadata about the file being uploaded.</param>
         /// <param name="cancellationToken">Used to cancel the upload operation.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, Stream stream, DriveFileMetadata fileMetadata, CancellationToken cancellationToken)
+        public static async Task UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, Stream stream, DriveFileMetadata fileMetadata, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
@@ -91,7 +91,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="streamName">The name of the stream being downloaded.</param>
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <returns>The downloaded file data.</returns>
-        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId)
+        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId)
         {
             if (storageDriver is null)
             {
@@ -121,7 +121,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the download operation.</param>
         /// <returns>The downloaded file data.</returns>
-        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken)
+        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
@@ -150,7 +150,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="streamName">The name of the stream being deleted.</param>
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId)
+        public static async Task DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId)
         {
             if (storageDriver is null)
             {
@@ -180,7 +180,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string streamName, string alternateId, CancellationToken cancellationToken)
+        public static async Task DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
@@ -208,7 +208,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="fileId">The ID of the file to delete.</param>
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string alternateId)
+        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? alternateId)
         {
             if (storageDriver is null)
             {
@@ -236,7 +236,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string alternateId, CancellationToken cancellationToken)
+        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? alternateId, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {

@@ -28,7 +28,7 @@ public class StorageDriverTests
         var partitionId = Guid.NewGuid();
         var fileId = Guid.NewGuid();
         var streamName = "default";
-        string alternateId = null;
+        string? alternateId = null;
         var fileName = "test.txt";
         var contentType = "text/plain";
         var text = "This is a test!";
@@ -49,13 +49,13 @@ public class StorageDriverTests
         file.Should().NotBeNull();
         file.Data.Should().NotBeNull();
         file.Metadata.Should().NotBeNull();
-        file.Metadata.FileName.Should().Be(fileName);
-        file.Metadata.ContentType.Should().Be(contentType);
+        file.Metadata?.FileName.Should().Be(fileName);
+        file.Metadata?.ContentType.Should().Be(contentType);
 
         using (var ms = new MemoryStream())
-        using (file.Data)
+        using (file!.Data)
         {
-            file.Data.CopyTo(ms);
+            file.Data!.CopyTo(ms);
             ms.Position = 0;
             var readData = ms.ToArray();
             var readText = Encoding.UTF8.GetString(readData);

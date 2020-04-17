@@ -43,7 +43,7 @@ public class SampleStorageDriver : IStorageDriver
         var metadataPath = $"{path}-metadata";
         var fileInfo = new FileInfo(path);
 
-        DriveFileMetadata metadata = null;
+        DriveFileMetadata? metadata = null;
         if (File.Exists(metadataPath))
         {
             var metadataFileJson = File.ReadAllText(metadataPath);
@@ -114,7 +114,7 @@ public class SampleStorageDriver : IStorageDriver
         return Task.CompletedTask;
     }
 
-    private string GetLocalPath(Guid tenantId, Guid partitionId, Guid fileId, string streamName)
+    private string GetLocalPath(Guid tenantId, Guid partitionId, Guid fileId, string? streamName)
     {
         Directory.CreateDirectory($"{tenantId}/{partitionId}/{fileId}");
         if (string.IsNullOrWhiteSpace(streamName))

@@ -36,7 +36,7 @@ namespace Rixian.Drive.Storage.Abstractions
                 }
                 else
                 {
-                    this.version = value.Trim();
+                    this.version = value?.Trim();
                 }
             }
         }
