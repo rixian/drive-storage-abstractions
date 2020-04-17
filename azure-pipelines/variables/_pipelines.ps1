@@ -12,7 +12,7 @@
     } else {
         Write-Output "$keyCaps=$($_.Value)" -ForegroundColor Yellow
         if ($env:TF_BUILD) {
-            Write-Output "##vso[task.setvariable variable=$keyCaps;]$($_.Value)"
+            Write-Host "##vso[task.setvariable variable=$keyCaps;]$($_.Value)"
         } elseif ($env:GITHUB_ACTIONS) {
             Write-Output "::set-env name=$keyCaps::$($_.Value)"
         }

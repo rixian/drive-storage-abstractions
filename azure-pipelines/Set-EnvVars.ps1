@@ -43,7 +43,7 @@ $Variables.GetEnumerator() |% {
 
     # If we're running in a cloud CI, set these environment variables so they propagate.
     if ($env:TF_BUILD) {
-        Write-Output "##vso[task.setvariable variable=$($_.Key);]$($_.Value)"
+        Write-Host "##vso[task.setvariable variable=$($_.Key);]$($_.Value)"
     }
     if ($env:GITHUB_ACTIONS) {
         Write-Output "::set-env name=$($_.Key)::$($_.Value)"
@@ -68,7 +68,7 @@ if ($PrependPath) {
         }
 
         if ($env:TF_BUILD) {
-            Write-Output "##vso[task.prependpath]$_"
+            Write-Host "##vso[task.prependpath]$_"
         }
         if ($env:GITHUB_ACTIONS) {
             Write-Output "::add-path::$_"
