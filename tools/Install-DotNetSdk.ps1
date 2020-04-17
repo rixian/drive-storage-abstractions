@@ -74,9 +74,9 @@ Function Get-InstallerExe($Version, [switch]$Runtime) {
 
 Function Install-DotNet($Version, [switch]$Runtime) {
     if ($Runtime) { $sdkSubstring = '' } else { $sdkSubstring = 'SDK ' }
-    Write-Output "Downloading .NET Core $sdkSubstring$Version..."
+    Write-Host "Downloading .NET Core $sdkSubstring$Version..."
     $Installer = Get-InstallerExe -Version $Version -Runtime:$Runtime
-    Write-Output "Installing .NET Core $sdkSubstring$Version..."
+    Write-Host "Installing .NET Core $sdkSubstring$Version..."
     cmd /c start /wait $Installer /install /quiet
     if ($LASTEXITCODE -ne 0) {
         throw "Failure to install .NET Core SDK"
@@ -115,7 +115,7 @@ if ($InstallLocality -eq 'machine') {
     $DotNetInstallDir = Join-Path $HOME .dotnet
 }
 
-Write-Output "Installing .NET Core SDK and runtimes to $DotNetInstallDir" -ForegroundColor Blue
+Write-Host "Installing .NET Core SDK and runtimes to $DotNetInstallDir" -ForegroundColor Blue
 
 if ($DotNetInstallDir) {
     $switches += '-InstallDir',$DotNetInstallDir

@@ -61,7 +61,7 @@ try {
     $HeaderColor = 'Green'
 
     if (!$NoRestore -and $PSCmdlet.ShouldProcess("NuGet packages", "Restore")) {
-        Write-Output "Restoring NuGet packages" -ForegroundColor $HeaderColor
+        Write-Host "Restoring NuGet packages" -ForegroundColor $HeaderColor
         dotnet restore
         if ($lastexitcode -ne 0) {
             throw "Failure while restoring packages."

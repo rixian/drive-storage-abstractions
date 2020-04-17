@@ -38,7 +38,7 @@ Function Get-SymbolFiles {
         Write-Output $BinaryImagePath
 
         # Convert the PDB to legacy Windows PDBs
-        Write-Output "Converting PDB for $_" -ForegroundColor DarkGray
+        Write-Host "Converting PDB for $_" -ForegroundColor DarkGray
         $WindowsPdbDir = "$($_.Directory.FullName)\$WindowsPdbSubDirName"
         if (!(Test-Path $WindowsPdbDir)) { mkdir $WindowsPdbDir | Out-Null }
         & "$PSScriptRoot\..\Convert-PDB.ps1" -DllPath $BinaryImagePath -PdbPath $_ -OutputPath "$WindowsPdbDir\$($_.BaseName).pdb"

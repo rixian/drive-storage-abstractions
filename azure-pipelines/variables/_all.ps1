@@ -6,7 +6,7 @@
 $vars = @{}
 
 Get-ChildItem "$PSScriptRoot\*.ps1" -Exclude "_*" |% {
-    Write-Output "Computing $($_.BaseName) variable"
+    Write-Host "Computing $($_.BaseName) variable"
     $vars[$_.BaseName] = & $_
 }
 

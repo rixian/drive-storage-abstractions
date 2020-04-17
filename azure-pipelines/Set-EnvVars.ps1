@@ -21,21 +21,21 @@ if ($Variables.Count -eq 0) {
 $cmdInstructions = !$env:TF_BUILD -and !$env:GITHUB_ACTIONS -and $env:PS1UnderCmd -eq '1'
 if ($cmdInstructions) {
     Write-Warning "Environment variables have been set that will be lost because you're running under cmd.exe"
-    Write-Output "Environment variables that must be set manually:" -ForegroundColor Blue
+    Write-Host "Environment variables that must be set manually:" -ForegroundColor Blue
 } else {
-    Write-Output "Environment variables set:" -ForegroundColor Blue
-    Write-Output ($Variables | Out-String)
+    Write-Host "Environment variables set:" -ForegroundColor Blue
+    Write-Host ($Variables | Out-String)
     if ($PrependPath) {
-        Write-Output "Paths prepended to PATH: $PrependPath"
+        Write-Host "Paths prepended to PATH: $PrependPath"
     }
 }
 
 if ($env:TF_BUILD) {
-    Write-Output "Azure Pipelines detected. Logging commands will be used to propagate environment variables and prepend path."
+    Write-Host "Azure Pipelines detected. Logging commands will be used to propagate environment variables and prepend path."
 }
 
 if ($env:GITHUB_ACTIONS) {
-    Write-Output "GitHub Actions detected. Logging commands will be used to propagate environment variables and prepend path."
+    Write-Host "GitHub Actions detected. Logging commands will be used to propagate environment variables and prepend path."
 }
 
 $Variables.GetEnumerator() |% {
@@ -46,11 +46,11 @@ $Variables.GetEnumerator() |% {
         Write-Host "##vso[task.setvariable variable=$($_.Key);]$($_.Value)"
     }
     if ($env:GITHUB_ACTIONS) {
-        Write-Output "::set-env name=$($_.Key)::$($_.Value)"
+        Write-Host "::set-env name=$($_.Key)::$($_.Value)"
     }
 
     if ($cmdInstructions) {
-        Write-Output "SET $($_.Key)=$($_.Value)"
+        Write-Host "SET $($_.Key)=$($_.Value)"
     }
 }
 
@@ -64,14 +64,14 @@ if ($PrependPath) {
         $newPathValue = "$_$pathDelimiter$env:PATH"
         Set-Item -Path env:PATH -Value $newPathValue
         if ($cmdInstructions) {
-            Write-Output "SET PATH=$newPathValue"
+            Write-Host "SET PATH=$newPathValue"
         }
 
         if ($env:TF_BUILD) {
             Write-Host "##vso[task.prependpath]$_"
         }
         if ($env:GITHUB_ACTIONS) {
-            Write-Output "::add-path::$_"
+            Write-Host "::add-path::$_"
         }
     }
 }
