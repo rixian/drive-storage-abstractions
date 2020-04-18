@@ -1,5 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <TargetFrameworks>net472;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RootNamespace />
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="2.8.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
@@ -13,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj" />
+    <ProjectReference Include="..\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
