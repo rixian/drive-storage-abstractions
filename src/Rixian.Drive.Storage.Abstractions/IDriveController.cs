@@ -5,6 +5,7 @@ namespace Rixian.Drive.Storage.Abstractions
 {
     using System;
     using System.Threading.Tasks;
+    using Rixian.Extensions.Errors;
 
     /// <summary>
     /// Represents a storage device type. Anologous to a physical machine which may contain many disks.
@@ -26,6 +27,6 @@ namespace Rixian.Drive.Storage.Abstractions
         /// </summary>
         /// <param name="driverInfo">Information required to initialize an instance of a storage driver.</param>>
         /// <returns>The initialized storage driver.</returns>
-        Task<IStorageDriver> GetDriverAsync(string driverInfo);
+        Task<Result<IStorageDriver>> GetDriverAsync(string driverInfo);
     }
 }
