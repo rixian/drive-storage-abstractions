@@ -413,7 +413,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsError.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -436,7 +437,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsError.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -458,7 +460,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsError.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -480,7 +483,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsError.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
