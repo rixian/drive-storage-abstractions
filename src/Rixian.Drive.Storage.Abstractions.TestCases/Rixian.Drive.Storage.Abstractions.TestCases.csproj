@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework></TargetFramework>
     <TargetFrameworks>net472;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
