@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{36CCE840-6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions", "src\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj", "{B0FEF5D5-41DD-4082-844D-8424BC40B6BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.Tests", "test\Rixian.Drive.Storage.Abstractions.Tests\Rixian.Drive.Storage.Abstractions.Tests.csproj", "{6D5E3BAE-1D42-4946-857B-7C77921965A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.Tests", "src\Rixian.Drive.Storage.Abstractions.Tests\Rixian.Drive.Storage.Abstractions.Tests.csproj", "{6D5E3BAE-1D42-4946-857B-7C77921965A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.TestCases", "test\Rixian.Drive.Storage.Abstractions.TestCases\Rixian.Drive.Storage.Abstractions.TestCases.csproj", "{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}"
 EndProject
