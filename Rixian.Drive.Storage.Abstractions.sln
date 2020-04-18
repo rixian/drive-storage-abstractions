@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.Tests", "test\Rixian.Drive.Storage.Abstractions.Tests\Rixian.Drive.Storage.Abstractions.Tests.csproj", "{6D5E3BAE-1D42-4946-857B-7C77921965A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.TestCases", "src\Rixian.Drive.Storage.Abstractions.TestCases\Rixian.Drive.Storage.Abstractions.TestCases.csproj", "{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rixian.Drive.Storage.Abstractions.TestCases", "test\Rixian.Drive.Storage.Abstractions.TestCases\Rixian.Drive.Storage.Abstractions.TestCases.csproj", "{59CD1DBF-086A-43FE-B5D2-A8709C64E9EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
