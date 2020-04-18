@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <IsPackable>true</IsPackable>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Rixian.Drive.Storage.Abstractions\Rixian.Drive.Storage.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
