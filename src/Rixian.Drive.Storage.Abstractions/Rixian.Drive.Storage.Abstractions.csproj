@@ -4,4 +4,8 @@
     <Description>Storage abstractions for Rixian Drive.</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Rixian.Extensions.Errors" Version="0.2.9" />
+  </ItemGroup>
+
 </Project>

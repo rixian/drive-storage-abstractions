@@ -8,6 +8,7 @@ namespace Rixian.Drive.Storage.Abstractions
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
+    using Rixian.Extensions.Errors;
 
     /// <summary>
     /// Extensions for the IStorageDriver interface.
@@ -26,14 +27,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="stream">The data stream to upload.</param>
         /// <param name="fileMetadata">Optional. Metadata about the file being uploaded.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, Stream? stream, DriveFileMetadata? fileMetadata)
+        public static async Task<Result> UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, Stream? stream, DriveFileMetadata? fileMetadata)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.UploadAsync(
+            return await storageDriver.UploadAsync(
                 new UploadOperationParameters
                 {
                     TenantId = tenantId,
@@ -60,14 +61,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="fileMetadata">Optional. Metadata about the file being uploaded.</param>
         /// <param name="cancellationToken">Used to cancel the upload operation.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, Stream stream, DriveFileMetadata fileMetadata, CancellationToken cancellationToken)
+        public static async Task<Result> UploadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, Stream stream, DriveFileMetadata fileMetadata, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.UploadAsync(
+            return await storageDriver.UploadAsync(
                 new UploadOperationParameters
                 {
                     TenantId = tenantId,
@@ -91,7 +92,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="streamName">The name of the stream being downloaded.</param>
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <returns>The downloaded file data.</returns>
-        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId)
+        public static async Task<Result<DriveFile>> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId)
         {
             if (storageDriver is null)
             {
@@ -121,7 +122,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the download operation.</param>
         /// <returns>The downloaded file data.</returns>
-        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, CancellationToken cancellationToken)
+        public static async Task<Result<DriveFile>> DownloadAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
@@ -150,14 +151,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="streamName">The name of the stream being deleted.</param>
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId)
+        public static async Task<Result> DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.DeleteAsync(
+            return await storageDriver.DeleteAsync(
                 new DeleteOperationParameters
                 {
                     TenantId = tenantId,
@@ -180,14 +181,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, CancellationToken cancellationToken)
+        public static async Task<Result> DeleteAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? streamName, string? alternateId, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.DeleteAsync(
+            return await storageDriver.DeleteAsync(
                 new DeleteOperationParameters
                 {
                     TenantId = tenantId,
@@ -208,7 +209,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="fileId">The ID of the file to delete.</param>
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? alternateId)
+        public static async Task<Result<ICollection<string>>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? alternateId)
         {
             if (storageDriver is null)
             {
@@ -236,7 +237,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="alternateId">The alternate id for the file.</param>
         /// <param name="cancellationToken">Used to cancel the delete operation.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? alternateId, CancellationToken cancellationToken)
+        public static async Task<Result<ICollection<string>>> ListStreamsAsync(this IStorageDriver storageDriver, Guid tenantId, Guid partitionId, Guid fileId, string? alternateId, CancellationToken cancellationToken)
         {
             if (storageDriver is null)
             {
@@ -262,14 +263,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="volumeId">The volume ID. Used for migrating off v1.0 storage.</param>
         /// <param name="partitionId">The partition ID.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task UpgradePartitionAsync(this IStorageDriver storageDriver, Guid tenantId, Guid volumeId, Guid partitionId)
+        public static async Task<Result> UpgradePartitionAsync(this IStorageDriver storageDriver, Guid tenantId, Guid volumeId, Guid partitionId)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.UpgradePartitionAsync(tenantId, volumeId, partitionId, default).ConfigureAwait(false);
+            return await storageDriver.UpgradePartitionAsync(tenantId, volumeId, partitionId, default).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -278,14 +279,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="storageDriver">The IStorageDriver.</param>
         /// <param name="parameters">The operation parameters.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task UploadAsync(this IStorageDriver storageDriver, UploadOperationParameters parameters)
+        public static async Task<Result> UploadAsync(this IStorageDriver storageDriver, UploadOperationParameters parameters)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.UploadAsync(parameters, default).ConfigureAwait(false);
+            return await storageDriver.UploadAsync(parameters, default).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -294,7 +295,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="storageDriver">The IStorageDriver.</param>
         /// <param name="parameters">The operation parameters.</param>
         /// <returns>The downloaded file data.</returns>
-        public static async Task<DriveFile> DownloadAsync(this IStorageDriver storageDriver, DownloadOperationParameters parameters)
+        public static async Task<Result<DriveFile>> DownloadAsync(this IStorageDriver storageDriver, DownloadOperationParameters parameters)
         {
             if (storageDriver is null)
             {
@@ -310,14 +311,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="storageDriver">The IStorageDriver.</param>
         /// <param name="parameters">The operation parameters.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task DeleteAsync(this IStorageDriver storageDriver, DeleteOperationParameters parameters)
+        public static async Task<Result> DeleteAsync(this IStorageDriver storageDriver, DeleteOperationParameters parameters)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.DeleteAsync(parameters, default).ConfigureAwait(false);
+            return await storageDriver.DeleteAsync(parameters, default).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -326,7 +327,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="storageDriver">The IStorageDriver.</param>
         /// <param name="parameters">The operation parameters.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task<ICollection<string>> ListStreamsAsync(this IStorageDriver storageDriver, ListStreamsOperationParameters parameters)
+        public static async Task<Result<ICollection<string>>> ListStreamsAsync(this IStorageDriver storageDriver, ListStreamsOperationParameters parameters)
         {
             if (storageDriver is null)
             {
@@ -342,7 +343,7 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="storageDriver">The IStorageDriver.</param>
         /// <param name="parameters">The operation parameters.</param>
         /// <returns>The downloaded file data.</returns>
-        public static async Task<bool> ExistsAsync(this IStorageDriver storageDriver, ExistsOperationParameters parameters)
+        public static async Task<Result<bool>> ExistsAsync(this IStorageDriver storageDriver, ExistsOperationParameters parameters)
         {
             if (storageDriver is null)
             {
@@ -358,14 +359,14 @@ namespace Rixian.Drive.Storage.Abstractions
         /// <param name="storageDriver">The IVersioningStorageDriver.</param>
         /// <param name="parameters">The operation parameters.</param>
         /// <returns>Awaitable task.</returns>
-        public static async Task SnapshotAsync(this IVersioningStorageDriver storageDriver, SnapshotOperationParameters parameters)
+        public static async Task<Result> SnapshotAsync(this IVersioningStorageDriver storageDriver, SnapshotOperationParameters parameters)
         {
             if (storageDriver is null)
             {
                 throw new ArgumentNullException(nameof(storageDriver));
             }
 
-            await storageDriver.SnapshotAsync(parameters, default).ConfigureAwait(false);
+            return await storageDriver.SnapshotAsync(parameters, default).ConfigureAwait(false);
         }
     }
 }
