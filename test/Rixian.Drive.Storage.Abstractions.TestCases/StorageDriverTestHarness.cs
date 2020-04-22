@@ -414,7 +414,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Assert
             Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
-            result.IsError.Should().BeTrue();
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -438,7 +438,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Assert
             Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
-            result.IsError.Should().BeTrue();
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -461,7 +461,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Assert
             Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
-            result.IsError.Should().BeTrue();
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -484,7 +484,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
 
             // Assert
             Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
-            result.IsError.Should().BeTrue();
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
