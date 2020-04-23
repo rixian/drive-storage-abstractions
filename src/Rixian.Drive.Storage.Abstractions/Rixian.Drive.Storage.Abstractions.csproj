@@ -4,4 +4,12 @@
     <Description>Storage abstractions for Rixian Drive.</Description>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(Configuration)' != 'Debug'">
+    <PackageReference Include="Rixian.Extensions.Errors" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <ProjectReference Include="..\..\..\extensions-errors\src\Rixian.Extensions.Errors\Rixian.Extensions.Errors.csproj" />
+  </ItemGroup>
+
 </Project>

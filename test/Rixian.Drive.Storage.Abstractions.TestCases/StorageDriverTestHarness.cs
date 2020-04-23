@@ -11,6 +11,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
     using System.Threading.Tasks;
     using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
+    using Rixian.Extensions.Errors;
     using Xunit;
     using Xunit.Abstractions;
 
@@ -249,12 +250,13 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             }).ConfigureAwait(false);
 
             // Assert
-            ICollection<string> streams = await storageDriver.ListStreamsAsync(new ListStreamsOperationParameters
+            Result<ICollection<string>> streamsResult = await storageDriver.ListStreamsAsync(new ListStreamsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
                 FileId = fileId,
             }).ConfigureAwait(false);
+            ICollection<string> streams = streamsResult.Value;
 
             streams.Should().NotBeNullOrEmpty();
             streams.Should().Contain(new[] { StreamOperationParameters.DefaultStreamName, "stream1", "stream2" });
@@ -295,12 +297,13 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             }).ConfigureAwait(false);
 
             // Assert
-            ICollection<string> streams = await storageDriver.ListStreamsAsync(new ListStreamsOperationParameters
+            Result<ICollection<string>> streamsResult = await storageDriver.ListStreamsAsync(new ListStreamsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
                 FileId = fileId,
             }).ConfigureAwait(false);
+            ICollection<string> streams = streamsResult.Value;
 
             streams.Should().NotBeNullOrEmpty();
             streams.Should().Contain(new[] { StreamOperationParameters.DefaultStreamName });
@@ -366,20 +369,20 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             }).ConfigureAwait(false);
 
             // Assert
-            var defaultStreamExists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            bool defaultStreamExists = await storageDriver.ExistsAsync(new ExistsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
                 FileId = fileId,
             }).ConfigureAwait(false);
-            var stream1Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            bool stream1Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
                 FileId = fileId,
                 StreamName = "stream1",
             }).ConfigureAwait(false);
-            var stream2Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            bool stream2Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
@@ -410,7 +413,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -433,7 +437,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -455,7 +460,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();
@@ -477,7 +483,8 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             // Act
 
             // Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false)).ConfigureAwait(false);
+            Result result = await storageDriver.UploadAsync(tenantId, partitionId, fileId, streamName, alternateId, stream, metadata).ConfigureAwait(false);
+            result.IsFail.Should().BeTrue();
 
             // Cleanup
             stream?.Dispose();

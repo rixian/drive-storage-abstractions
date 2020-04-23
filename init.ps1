@@ -62,10 +62,13 @@ try {
 
     if (!$NoRestore -and $PSCmdlet.ShouldProcess("NuGet packages", "Restore")) {
         Write-Host "Restoring NuGet packages" -ForegroundColor $HeaderColor
-        dotnet restore
+        dotnet restore /property:Configuration=Release
         if ($lastexitcode -ne 0) {
             throw "Failure while restoring packages."
         }
+    }
+    else {
+        Write-Host "Not restoring NuGet packages" -ForegroundColor $HeaderColor
     }
 
     & "$PSScriptRoot\azure-pipelines\Set-EnvVars.ps1" -Variables $EnvVars | Out-Null

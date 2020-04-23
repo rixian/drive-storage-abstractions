@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Rixian.Drive.Storage.Abstractions;
+using Rixian.Extensions.Errors;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -16,7 +17,7 @@ public class SampleStorageDriver : IStorageDriver
 {
     public string DriverVersion => "1.0";
 
-    public Task DeleteAsync(DeleteOperationParameters parameters, CancellationToken cancellationToken)
+    public Task<Result> DeleteAsync(DeleteOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {
@@ -29,10 +30,10 @@ public class SampleStorageDriver : IStorageDriver
             File.Delete(path);
         }
 
-        return Task.CompletedTask;
+        return Task.FromResult(Result.Default);
     }
 
-    public Task<DriveFile> DownloadAsync(DownloadOperationParameters parameters, CancellationToken cancellationToken)
+    public Task<Result<DriveFile>> DownloadAsync(DownloadOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {
@@ -50,14 +51,14 @@ public class SampleStorageDriver : IStorageDriver
             metadata = JsonConvert.DeserializeObject<DriveFileMetadata>(metadataFileJson);
         }
 
-        return Task.FromResult(new DriveFile
+        return Task.FromResult<Result<DriveFile>>(new DriveFile
         {
             Data = fileInfo.OpenRead(),
             Metadata = metadata,
         });
     }
 
-    public Task<bool> ExistsAsync(ExistsOperationParameters parameters, CancellationToken cancellationToken)
+    public Task<Result<bool>> ExistsAsync(ExistsOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {
@@ -65,10 +66,10 @@ public class SampleStorageDriver : IStorageDriver
         }
 
         var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, parameters.StreamName);
-        return Task.FromResult(File.Exists(path));
+        return Task.FromResult<Result<bool>>(File.Exists(path));
     }
 
-    public Task<ICollection<string>> ListStreamsAsync(ListStreamsOperationParameters parameters, CancellationToken cancellationToken)
+    public Task<Result<ICollection<string>>> ListStreamsAsync(ListStreamsOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {
@@ -77,15 +78,15 @@ public class SampleStorageDriver : IStorageDriver
 
         var path = GetLocalPath(parameters.TenantId, parameters.PartitionId, parameters.FileId, null);
         var files = Directory.GetFiles(path, "*.*");
-        return Task.FromResult<ICollection<string>>(files);
+        return Task.FromResult<Result<ICollection<string>>>(files);
     }
 
-    public Task UpgradePartitionAsync(Guid tenantId, Guid volumeId, Guid partitionId, CancellationToken cancellationToken)
+    public Task<Result> UpgradePartitionAsync(Guid tenantId, Guid volumeId, Guid partitionId, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
+        return Task.FromResult(Result.Default);
     }
 
-    public Task UploadAsync(UploadOperationParameters parameters, CancellationToken cancellationToken)
+    public Task<Result> UploadAsync(UploadOperationParameters parameters, CancellationToken cancellationToken)
     {
         if (parameters is null)
         {
@@ -110,7 +111,7 @@ public class SampleStorageDriver : IStorageDriver
             File.WriteAllText($"{path}-metadata", metadataFileJson);
         }
 
-        return Task.CompletedTask;
+        return Task.FromResult(Result.Default);
     }
 
     private static string GetLocalPath(Guid tenantId, Guid partitionId, Guid fileId, string? streamName)

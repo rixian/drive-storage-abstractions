@@ -49,7 +49,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
             }).ConfigureAwait(false);
 
             // Assert
-            var versionedDefaultStreamExists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            bool versionedDefaultStreamExists = await storageDriver.ExistsAsync(new ExistsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
@@ -57,7 +57,7 @@ namespace Rixian.Drive.Storage.Abstractions.TestCases
                 AlternateId = alternateId,
                 Version = "123",
             }).ConfigureAwait(false);
-            var versionedStream1Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
+            bool versionedStream1Exists = await storageDriver.ExistsAsync(new ExistsOperationParameters
             {
                 TenantId = tenantId,
                 PartitionId = partitionId,
